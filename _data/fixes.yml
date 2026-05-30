@@ -13,6 +13,32 @@
 #   status:        one of Submitted, Merged, Closed, In progress
 #   note:          optional extra (omit if not needed)
 
+- package: treepy
+  upstream_name: volrath/treepy.el
+  upstream_url: https://github.com/volrath/treepy.el
+  warning: "Assignment/reference to free variables in tests, plus a docstring with unescaped single quotes."
+  fix: >-
+    Declared the top-level test fixtures `numered-tree` and `custom-zipper`
+    with `defvar` instead of `setq`, and de-quoted a docstring. Also
+    corrected Package-Requires from 25.1 to 27.1, since treepy.el uses
+    `with-suppressed-warnings` (Emacs 27.1).
+  ci: "GitHub Actions across Emacs 27.1, 30.1, and snapshot; byte-compile (warnings as errors) and run tests; dependabot for actions."
+  pr_url: https://github.com/volrath/treepy.el/pull/19
+  pr_label: volrath/treepy.el#19
+  status: Submitted
+
+- package: yaml
+  upstream_name: zkry/yaml.el
+  upstream_url: https://github.com/zkry/yaml.el
+  warning: "Two `Unused lexical variable` warnings in yaml-tests.el."
+  fix: >-
+    Dropped the unused `condition-case` error variable (use nil) and renamed
+    an unused `let*` binding to `_parsed`.
+  ci: "Existing CI ran only Emacs 27.2; added a byte-compile job (warnings as errors) across Emacs 25.1, 30.1, and snapshot, plus dependabot."
+  pr_url: https://github.com/zkry/yaml.el/pull/66
+  pr_label: zkry/yaml.el#66
+  status: Submitted
+
 - package: merlin
   upstream_name: ocaml/merlin
   upstream_url: https://github.com/ocaml/merlin
