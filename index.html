@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Emacs package maintenance: byte-compile warning fixes</title>
+    <meta
+      name="description"
+      content="Tracking byte-compile-warning fixes contributed upstream to widely-used Emacs packages."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Emacs package maintenance</h1>
+      <p class="lead">
+        Tracking byte-compile-warning fixes contributed upstream to
+        widely-used Emacs packages.
+      </p>
+    </header>
+
+    <main>
+      <section id="motivation">
+        <h2>Motivation</h2>
+        <p>
+          Many widely-used Emacs packages, especially those distributed
+          through MELPA, are lightly maintained or dormant. As Emacs
+          evolves, byte-compile warnings accumulate: functions and macros
+          get marked obsolete, signatures change, and constructs that once
+          compiled cleanly start emitting noise.
+        </p>
+        <p>
+          In my view, small and careful patches are a reasonable way to keep
+          these packages compiling cleanly and to raise confidence in their
+          continued support. This is community maintenance work, done with
+          AI assistance. It is not a product and not affiliated with any
+          company.
+        </p>
+      </section>
+
+      <section id="problem">
+        <h2>Problem</h2>
+        <p>
+          As Emacs releases progress, the byte-compiler flags newly-obsolete
+          constructs and other issues. One example: <code>if-let</code> was
+          marked obsolete in Emacs 31.1 in favour of <code>if-let*</code>.
+        </p>
+        <p>
+          Across a typical configuration of around 60 packages, there can be
+          over a thousand such warning lines. Because maintainers may be
+          inactive, these warnings tend to linger rather than get cleaned up.
+        </p>
+      </section>
+
+      <section id="approach">
+        <h2>Approach</h2>
+        <p>For each package, the process is:</p>
+        <ol>
+          <li>
+            Verify the warning is not already fixed on the upstream default
+            branch.
+          </li>
+          <li>
+            Make a minimal, behaviour-preserving fix that stays compatible
+            with the package's older supported Emacs versions. Prefer
+            rewrites that do not raise the minimum supported version.
+          </li>
+          <li>
+            Add a CI workflow (GitHub Actions) that byte-compiles with
+            warnings treated as errors and loads the package, run on the
+            minimum supported Emacs and the latest stable, plus a development
+            snapshot. Add Dependabot to keep the actions current.
+          </li>
+          <li>Submit a focused pull request: one fix per PR.</li>
+        </ol>
+        <p>
+          The longer-term plan is to run small local models continuously over
+          a set of top packages, finding and fixing such warnings step by
+          step. The aim is to gradually increase trust in the support status
+          of MELPA packages.
+        </p>
+      </section>
+
+      <section id="fixes">
+        <h2>Fixes log</h2>
+        <!--
+          To add a new fix, copy one <article class="fix"> ... </article>
+          block below and fill in the fields. Keep entries newest-first.
+          Use only ASCII characters. Status values: Submitted, Merged,
+          Closed, In progress.
+        -->
+        <article class="fix">
+          <h3>xterm-color</h3>
+          <dl>
+            <dt>Package</dt>
+            <dd>xterm-color</dd>
+
+            <dt>Upstream</dt>
+            <dd>
+              <a href="https://github.com/atomontage/xterm-color"
+                >atomontage/xterm-color</a
+              >
+            </dd>
+
+            <dt>Warning</dt>
+            <dd>
+              <code>if-let</code> obsolete as of Emacs 31.1 (use
+              <code>if-let*</code>).
+            </dd>
+
+            <dt>Fix</dt>
+            <dd>
+              Rewrote the 4 call sites with plain <code>let</code> +
+              <code>if</code>. This is backward compatible and does not bump
+              the minimum version for the fix itself. Also corrected
+              Package-Requires from 24.4 to 25.1, since the package uses
+              <code>defvar-local</code> (introduced in Emacs 25.1).
+            </dd>
+
+            <dt>CI added</dt>
+            <dd>
+              GitHub Actions across Emacs 25.1, 30.1, and snapshot.
+              Byte-compile (warnings as errors) and load. Dependabot for
+              actions.
+            </dd>
+
+            <dt>PR</dt>
+            <dd>
+              <a href="https://github.com/atomontage/xterm-color/pull/51"
+                >atomontage/xterm-color#51</a
+              >
+              (submitted; upstream appears dormant)
+            </dd>
+
+            <dt>Status</dt>
+            <dd><span class="status status-submitted">Submitted</span></dd>
+          </dl>
+        </article>
+        <!-- End of fix entry. Add the next entry above this comment. -->
+      </section>
+
+      <section id="process">
+        <h2>How it works</h2>
+        <p>
+          Each fix is scoped to a single warning class in a single package.
+          The change is checked against the package's stated minimum Emacs
+          version, and CI exercises both that minimum and a recent build so
+          regressions show up before a PR is opened. The byte-compile step
+          treats warnings as errors, so a clean run is the success
+          condition.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Community maintenance of Emacs packages. No product, no company.
+        AI-assisted.
+      </p>
+    </footer>
+  </body>
+</html>

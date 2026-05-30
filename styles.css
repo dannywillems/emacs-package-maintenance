@@ -1,0 +1,158 @@
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --link: #1a5fb4;
+  --code-bg: #f4f4f4;
+  --status-bg: #eef3fb;
+  --status-fg: #1a5fb4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161616;
+    --fg: #e6e6e6;
+    --muted: #a0a0a0;
+    --border: #333333;
+    --link: #6ea8fe;
+    --code-bg: #222222;
+    --status-bg: #1e2a3a;
+    --status-fg: #6ea8fe;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  margin: 0;
+  padding: 2rem 1.25rem 4rem;
+}
+
+header,
+main,
+footer {
+  max-width: 70ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header {
+  margin-bottom: 2.5rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin: 2.5rem 0 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--link);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ol,
+ul {
+  padding-left: 1.4rem;
+}
+
+li {
+  margin-bottom: 0.4rem;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: var(--code-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.fix {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.fix dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.4rem 1rem;
+}
+
+.fix dt {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.fix dd {
+  margin: 0;
+}
+
+@media (max-width: 30rem) {
+  .fix dl {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+
+  .fix dd {
+    margin-bottom: 0.6rem;
+  }
+}
+
+.status {
+  display: inline-block;
+  font-size: 0.85rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  background: var(--status-bg);
+  color: var(--status-fg);
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
