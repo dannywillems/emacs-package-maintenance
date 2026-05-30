@@ -1,0 +1,44 @@
+# Fixes log data. Newest-first: file order is the display order.
+#
+# To add a new fix, prepend a new entry at the top of this list.
+# Fields:
+#   package:       short package name
+#   upstream_name: e.g. "atomontage/xterm-color"
+#   upstream_url:  full https URL to the upstream repo
+#   warning:       short warning text (plain text; may mention code names)
+#   fix:           short paragraph describing the fix
+#   ci:            what CI was added, or "None; <reason>"
+#   pr_url:        full PR URL
+#   pr_label:      e.g. "atomontage/xterm-color#51"
+#   status:        one of Submitted, Merged, Closed, In progress
+#   note:          optional extra (omit if not needed)
+
+- package: merlin
+  upstream_name: ocaml/merlin
+  upstream_url: https://github.com/ocaml/merlin
+  warning: "`when-let` obsolete as of Emacs 31.1 (use `when-let*` or `and-let*`)."
+  fix: >-
+    Rewrote the call site in `merlin--construct-point` with `let` + `when`.
+    Backward compatible; avoided `when-let*` (Emacs 26.1) to keep the package's
+    declared 25.1 minimum.
+  ci: None; merlin already has an Emacs lint CI workflow.
+  pr_url: https://github.com/ocaml/merlin/pull/2076
+  pr_label: ocaml/merlin#2076
+  status: Submitted
+
+- package: xterm-color
+  upstream_name: atomontage/xterm-color
+  upstream_url: https://github.com/atomontage/xterm-color
+  warning: "`if-let` obsolete as of Emacs 31.1 (use `if-let*`)."
+  fix: >-
+    Rewrote the 4 call sites with plain `let` + `if`. This is backward
+    compatible and does not bump the minimum version for the fix itself. Also
+    corrected Package-Requires from 24.4 to 25.1, since the package uses
+    `defvar-local` (introduced in Emacs 25.1).
+  ci: >-
+    GitHub Actions across Emacs 25.1, 30.1, and snapshot. Byte-compile
+    (warnings as errors) and load. Dependabot for actions.
+  pr_url: https://github.com/atomontage/xterm-color/pull/51
+  pr_label: atomontage/xterm-color#51
+  status: Submitted
+  note: upstream appears dormant

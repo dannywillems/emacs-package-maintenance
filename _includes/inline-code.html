@@ -1,0 +1,10 @@
+{%- comment -%}
+Render a plain-text string, converting `backtick`-delimited spans into
+<code> elements. Pass the text as include.text. Segments at odd indices
+(1, 3, 5, ...) of the backtick split are the code spans.
+{%- endcomment -%}
+{%- assign _parts = include.text | split: "`" -%}
+{%- for _part in _parts -%}
+{%- assign _mod = forloop.index0 | modulo: 2 -%}
+{%- if _mod == 1 -%}<code>{{ _part }}</code>{%- else -%}{{ _part }}{%- endif -%}
+{%- endfor -%}

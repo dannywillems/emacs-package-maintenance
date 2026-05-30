@@ -1,0 +1,4 @@
+title: Emacs package maintenance
+description: >-
+  Tracking byte-compile-warning fixes contributed upstream to widely-used
+  Emacs packages.

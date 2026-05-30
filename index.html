@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,7 +11,7 @@
       name="description"
       content="Tracking byte-compile-warning fixes contributed upstream to widely-used Emacs packages."
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
   </head>
   <body>
     <header>
@@ -83,100 +86,43 @@
 
       <section id="fixes">
         <h2>Fixes log</h2>
-        <!--
-          To add a new fix, copy one <article class="fix"> ... </article>
-          block below and fill in the fields. Keep entries newest-first.
-          Use only ASCII characters. Status values: Submitted, Merged,
-          Closed, In progress.
-        -->
+        {%- for fix in site.data.fixes %}
         <article class="fix">
-          <h3>merlin</h3>
+          <h3>{{ fix.package }}</h3>
           <dl>
             <dt>Package</dt>
-            <dd>merlin</dd>
+            <dd>{{ fix.package }}</dd>
 
             <dt>Upstream</dt>
             <dd>
-              <a href="https://github.com/ocaml/merlin">ocaml/merlin</a>
+              <a href="{{ fix.upstream_url }}">{{ fix.upstream_name }}</a>
             </dd>
 
             <dt>Warning</dt>
-            <dd>
-              <code>when-let</code> obsolete as of Emacs 31.1 (use
-              <code>when-let*</code> or <code>and-let*</code>).
-            </dd>
+            <dd>{% include inline-code.html text=fix.warning %}</dd>
 
             <dt>Fix</dt>
-            <dd>
-              Rewrote the call site in <code>merlin--construct-point</code>
-              with <code>let</code> + <code>when</code>. Backward compatible;
-              avoided <code>when-let*</code> (Emacs 26.1) to keep the package's
-              declared 25.1 minimum.
-            </dd>
+            <dd>{% include inline-code.html text=fix.fix %}</dd>
 
             <dt>CI added</dt>
-            <dd>None; merlin already has an Emacs lint CI workflow.</dd>
+            <dd>{% include inline-code.html text=fix.ci %}</dd>
 
             <dt>PR</dt>
             <dd>
-              <a href="https://github.com/ocaml/merlin/pull/2076"
-                >ocaml/merlin#2076</a
-              >
-              (submitted)
+              <a href="{{ fix.pr_url }}">{{ fix.pr_label }}</a>
+              ({{ fix.status | downcase }}{% if fix.note %}; {{ fix.note }}{% endif %})
             </dd>
 
             <dt>Status</dt>
-            <dd><span class="status status-submitted">Submitted</span></dd>
-          </dl>
-        </article>
-        <article class="fix">
-          <h3>xterm-color</h3>
-          <dl>
-            <dt>Package</dt>
-            <dd>xterm-color</dd>
-
-            <dt>Upstream</dt>
             <dd>
-              <a href="https://github.com/atomontage/xterm-color"
-                >atomontage/xterm-color</a
+              {%- assign status_class = fix.status | downcase | replace: " ", "-" -%}
+              <span class="status status-{{ status_class }}"
+                >{{ fix.status }}</span
               >
             </dd>
-
-            <dt>Warning</dt>
-            <dd>
-              <code>if-let</code> obsolete as of Emacs 31.1 (use
-              <code>if-let*</code>).
-            </dd>
-
-            <dt>Fix</dt>
-            <dd>
-              Rewrote the 4 call sites with plain <code>let</code> +
-              <code>if</code>. This is backward compatible and does not bump
-              the minimum version for the fix itself. Also corrected
-              Package-Requires from 24.4 to 25.1, since the package uses
-              <code>defvar-local</code> (introduced in Emacs 25.1).
-            </dd>
-
-            <dt>CI added</dt>
-            <dd>
-              GitHub Actions across Emacs 25.1, 30.1, and snapshot.
-              Byte-compile (warnings as errors) and load. Dependabot for
-              actions.
-            </dd>
-
-            <dt>PR</dt>
-            <dd>
-              <a href="https://github.com/atomontage/xterm-color/pull/51"
-                >atomontage/xterm-color#51</a
-              >
-              (submitted; upstream appears dormant)
-            </dd>
-
-            <dt>Status</dt>
-            <dd><span class="status status-submitted">Submitted</span></dd>
           </dl>
         </article>
-        <!-- End of fix entry. Add the next entry above this comment. -->
+        {%- endfor %}
       </section>
 
       <section id="process">
