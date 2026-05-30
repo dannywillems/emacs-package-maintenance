@@ -26,6 +26,16 @@ For each package:
    workflow if none exists, or extend an existing one.
 4. Open one pull request per fix.
 
+## Agents
+
+The fixes are produced by agents that follow a fixed, auditable process. Each
+agent is specified in [`agents/`](agents/) so a person or another model can run
+it; see [`agents/byte-compile-warning-fix.md`](agents/byte-compile-warning-fix.md).
+
+Anyone can contribute an agent: add a spec under `agents/` and an entry to
+[`_data/agents.yml`](_data/agents.yml) via a pull request. The agents list on
+the site is rendered from that data file, so a new agent shows up once merged.
+
 ## The site
 
 The site is a static page built by Jekyll in GitHub Actions and served from

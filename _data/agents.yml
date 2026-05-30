@@ -1,0 +1,17 @@
+# Agents that run against Emacs packages in this effort.
+#
+# To add an agent, drop a spec under agents/ and prepend an entry here:
+#   id:      short kebab-case id
+#   name:    human-readable name
+#   summary: one or two sentences on what the agent does
+#   spec:    path to the spec file in this repo (rendered on GitHub)
+#   status:  Active, Draft, or Retired
+
+- id: byte-compile-warning-fix
+  name: Byte-compile warning fix
+  summary: >-
+    For one Emacs package, find a byte-compile warning, make a minimal
+    version-compatible fix, ensure CI compiles with warnings as errors on the
+    minimum and latest stable Emacs, and open one upstream pull request.
+  spec: agents/byte-compile-warning-fix.md
+  status: Active

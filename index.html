@@ -84,6 +84,33 @@ layout: null
         </p>
       </section>
 
+      <section id="agents">
+        <h2>Agents</h2>
+        <p>
+          The fixes are produced by agents that run a fixed, auditable
+          process against a package. Each agent is specified so a person or
+          another model can run it. Anyone can contribute an agent: add a spec
+          under <code>agents/</code> and an entry to
+          <code>_data/agents.yml</code> via a pull request, and it can be picked
+          up here.
+        </p>
+        {%- for agent in site.data.agents %}
+        <article class="agent">
+          <h3>{{ agent.name }}</h3>
+          <p>{{ agent.summary }}</p>
+          <p>
+            <a
+              href="https://github.com/dannywillems/emacs-package-maintenance/blob/main/{{ agent.spec }}"
+              >Specification</a
+            >
+            <span class="status status-{{ agent.status | downcase | replace: ' ', '-' }}"
+              >{{ agent.status }}</span
+            >
+          </p>
+        </article>
+        {%- endfor %}
+      </section>
+
       <section id="fixes">
         <h2>Fixes log</h2>
         {%- for fix in site.data.fixes %}
