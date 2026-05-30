@@ -90,6 +90,46 @@
           Closed, In progress.
         -->
         <article class="fix">
+          <h3>merlin</h3>
+          <dl>
+            <dt>Package</dt>
+            <dd>merlin</dd>
+
+            <dt>Upstream</dt>
+            <dd>
+              <a href="https://github.com/ocaml/merlin">ocaml/merlin</a>
+            </dd>
+
+            <dt>Warning</dt>
+            <dd>
+              <code>when-let</code> obsolete as of Emacs 31.1 (use
+              <code>when-let*</code> or <code>and-let*</code>).
+            </dd>
+
+            <dt>Fix</dt>
+            <dd>
+              Rewrote the call site in <code>merlin--construct-point</code>
+              with <code>let</code> + <code>when</code>. Backward compatible;
+              avoided <code>when-let*</code> (Emacs 26.1) to keep the package's
+              declared 25.1 minimum.
+            </dd>
+
+            <dt>CI added</dt>
+            <dd>None; merlin already has an Emacs lint CI workflow.</dd>
+
+            <dt>PR</dt>
+            <dd>
+              <a href="https://github.com/ocaml/merlin/pull/2076"
+                >ocaml/merlin#2076</a
+              >
+              (submitted)
+            </dd>
+
+            <dt>Status</dt>
+            <dd><span class="status status-submitted">Submitted</span></dd>
+          </dl>
+        </article>
+        <article class="fix">
           <h3>xterm-color</h3>
           <dl>
             <dt>Package</dt>
