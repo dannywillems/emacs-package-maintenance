@@ -13,6 +13,33 @@
 #   status:        one of Submitted, Merged, Closed, In progress
 #   note:          optional extra (omit if not needed)
 
+- package: winum
+  upstream_name: deb0ch/emacs-winum
+  upstream_url: https://github.com/deb0ch/emacs-winum
+  warning: "Docstrings with unescaped single quotes (4)."
+  fix: >-
+    Escaped the docstring quotes. The missing lexical-binding cookie, a
+    defcustom `:type 'list`, and the deprecated `define-minor-mode` positional
+    args are left as residual (all behaviour-changing).
+  ci: "Repo had no CI. Added byte-compile + load on Emacs 24.5, 30.1, snapshot (no -Werror, residual warnings remain) + dependabot."
+  pr_url: https://github.com/deb0ch/emacs-winum/pull/37
+  pr_label: deb0ch/emacs-winum#37
+  status: Submitted
+
+- package: deferred
+  upstream_name: kiwanami/emacs-deferred
+  upstream_url: https://github.com/kiwanami/emacs-deferred
+  warning: "Quoted condition-case conditions, and docstring quoting/width."
+  fix: >-
+    Unquoted the condition-case conditions and fixed docstring quoting and
+    width across deferred.el and concurrent.el. Residual: `cl-gensym` (the
+    `gensym` replacement needs Emacs 26.1, above the 24.x minimum) and an
+    unused-length debug path.
+  ci: "Repo had no CI. Added byte-compile + load on Emacs 24.4, 30.1, snapshot (no -Werror, residual warnings remain) + dependabot."
+  pr_url: https://github.com/kiwanami/emacs-deferred/pull/60
+  pr_label: kiwanami/emacs-deferred#60
+  status: Submitted
+
 - package: sage-shell-mode
   upstream_name: sagemath/sage-shell-mode
   upstream_url: https://github.com/sagemath/sage-shell-mode
