@@ -239,10 +239,11 @@
   status: Submitted
   pr_url: https://github.com/org-roam/org-roam/pull/2621
   pr_label: org-roam/org-roam#2621
-  ci: Added
-  tested: "byte-compile + load on Emacs 29.4, 30.1, snapshot"
-  werror: "No"
+  ci: Existing
+  tested: "upstream test.yml"
+  werror: Unknown
   checked: 2026-05-31
+  note: "Maintainer positive; the extra byte-compile workflow was removed at their suggestion (declarations silence the warnings)."
 
 - package: diff-hl
   upstream: dgutov/diff-hl

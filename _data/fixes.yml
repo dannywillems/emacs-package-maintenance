@@ -105,7 +105,7 @@
   fix: >-
     Added `declare-function` and `defvar` forward declarations. Residual: one
     EIEIO unknown-slot warning (needs class reordering), left as behaviour-changing.
-  ci: "Repo had no byte-compile CI. Added byte-compile + load on Emacs 29.4, 30.1, snapshot (no -Werror; snapshot non-blocking) + dependabot."
+  ci: "Maintainer positive; the added byte-compile workflow was removed at their suggestion (org-roam already runs CI; the declarations silence the warnings). A note points at issue #2569."
   pr_url: https://github.com/org-roam/org-roam/pull/2621
   pr_label: org-roam/org-roam#2621
   status: Submitted
