@@ -68,7 +68,7 @@
   upstream: noctuid/annalist.el
   url: https://github.com/noctuid/annalist.el
   outcome: PR
-  status: Submitted
+  status: Merged
   pr_url: https://github.com/noctuid/annalist.el/pull/6
   pr_label: noctuid/annalist.el#6
   ci: Added
@@ -304,7 +304,7 @@
   upstream: atomontage/xterm-color
   url: https://github.com/atomontage/xterm-color
   outcome: PR
-  status: Submitted
+  status: Merged
   pr_url: https://github.com/atomontage/xterm-color/pull/51
   pr_label: atomontage/xterm-color#51
   ci: Added
@@ -340,7 +340,7 @@
   upstream: volrath/treepy.el
   url: https://github.com/volrath/treepy.el
   outcome: PR
-  status: Submitted
+  status: Merged
   pr_url: https://github.com/volrath/treepy.el/pull/19
   pr_label: volrath/treepy.el#19
   ci: Added
