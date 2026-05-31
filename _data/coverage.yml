@@ -26,6 +26,94 @@
   werror: "No"
   checked: 2026-05-31
 
+- package: magit
+  upstream: magit/magit
+  url: https://github.com/magit/magit
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "emacscollective shared compile workflow (warnings as errors) + tests"
+  werror: "Yes"
+  checked: 2026-05-31
+  note: "All 47 lisp sources compile clean; meticulously maintained."
+
+- package: forge
+  upstream: magit/forge
+  url: https://github.com/magit/forge
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "emacscollective shared compile workflow (warnings as errors)"
+  werror: "Yes"
+  checked: 2026-05-31
+  note: "All 23 lisp sources compile clean."
+
+- package: ghub
+  upstream: magit/ghub
+  url: https://github.com/magit/ghub
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "emacscollective shared compile workflow (warnings as errors)"
+  werror: "Yes"
+  checked: 2026-05-31
+  note: "Clean; if-let/when-let are cond-let shorthands via read-symbol-shorthands, not the obsolete builtins."
+
+- package: closql
+  upstream: emacscollective/closql
+  url: https://github.com/emacscollective/closql
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "emacscollective shared compile workflow"
+  werror: "Yes"
+  checked: 2026-05-31
+  note: "Byte-compile clean; only checkdoc style notes (out of scope)."
+
+- package: with-editor
+  upstream: magit/with-editor
+  url: https://github.com/magit/with-editor
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "emacscollective shared compile workflow (warnings as errors)"
+  werror: "Yes"
+  checked: 2026-05-31
+  note: "Clean; docstrings-control-chars intentionally suppressed for the sleeping-editor regexps."
+
+- package: llama
+  upstream: tarsius/llama
+  url: https://github.com/tarsius/llama
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "emacscollective shared compile workflow (warnings as errors)"
+  werror: "Yes"
+  checked: 2026-05-31
+  note: "Byte-compile clean."
+
+- package: cond-let
+  upstream: tarsius/cond-let
+  url: https://github.com/tarsius/cond-let
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "emacscollective shared compile workflow (warnings as errors)"
+  werror: "Yes"
+  checked: 2026-05-31
+  note: "Byte-compile clean."
+
+- package: emacsql
+  upstream: magit/emacsql
+  url: https://github.com/magit/emacsql
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "emacscollective shared compile workflow (warnings as errors)"
+  werror: "Yes"
+  checked: 2026-05-31
+  note: "Byte-compile clean."
+
 - package: posframe
   upstream: tumashu/posframe
   url: https://github.com/tumashu/posframe
