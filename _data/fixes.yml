@@ -132,7 +132,7 @@
   ci: "Existing CI ran only ert tests; added Emacs 30.1 to the matrix, bumped checkout to v5, and added dependabot. A warnings-as-errors job was not added because the package has many pre-existing out-of-scope warnings."
   pr_url: https://github.com/jasonm23/autothemer/pull/31
   pr_label: jasonm23/autothemer#31
-  status: Submitted
+  status: Merged
 
 - package: treepy
   upstream_name: volrath/treepy.el
