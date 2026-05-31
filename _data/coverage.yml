@@ -26,6 +26,86 @@
   werror: "No"
   checked: 2026-05-31
 
+- package: smartparens
+  upstream: Fuco1/smartparens
+  url: https://github.com/Fuco1/smartparens
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/Fuco1/smartparens/pull/1242
+  pr_label: Fuco1/smartparens#1242
+  ci: Added
+  tested: "byte-compile + load on Emacs 30.1 and others"
+  werror: "No"
+  checked: 2026-05-31
+
+- package: dune
+  upstream: ocaml/dune
+  url: https://github.com/ocaml/dune
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/ocaml/dune/pull/14798
+  pr_label: ocaml/dune#14798
+  ci: Added
+  tested: "byte-compile + load on Emacs 29.1, 30.1, snapshot"
+  werror: "No"
+  checked: 2026-05-31
+
+- package: annalist
+  upstream: noctuid/annalist.el
+  url: https://github.com/noctuid/annalist.el
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/noctuid/annalist.el/pull/6
+  pr_label: noctuid/annalist.el#6
+  ci: Added
+  tested: "byte-compile on Emacs 30.1, snapshot; load on 24.4"
+  werror: "Partial"
+  checked: 2026-05-31
+
+- package: goto-chg
+  upstream: emacs-evil/goto-chg
+  url: https://github.com/emacs-evil/goto-chg
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "upstream workflow"
+  werror: Unknown
+  checked: 2026-05-31
+  note: "Clean; byte-compile warnings already fixed upstream in 1.7.1/1.7.2."
+
+- package: treemacs-nerd-icons
+  upstream: rainstormstudio/treemacs-nerd-icons
+  url: https://github.com/rainstormstudio/treemacs-nerd-icons
+  outcome: Skipped
+  status: Skipped
+  ci: None
+  tested: "-"
+  werror: "-"
+  checked: 2026-05-31
+  note: "Single source file compiles clean."
+
+- package: f
+  upstream: rejeep/f.el
+  url: https://github.com/rejeep/f.el
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "upstream workflow"
+  werror: Unknown
+  checked: 2026-05-31
+  note: "f.el compiles clean; f-shortdoc.el is no-byte-compile."
+
+- package: s
+  upstream: magnars/s.el
+  url: https://github.com/magnars/s.el
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "upstream workflow"
+  werror: Unknown
+  checked: 2026-05-31
+  note: "s.el compiles clean."
+
 - package: magit
   upstream: magit/magit
   url: https://github.com/magit/magit

@@ -13,6 +13,46 @@
 #   status:        one of Submitted, Merged, Closed, In progress
 #   note:          optional extra (omit if not needed)
 
+- package: smartparens
+  upstream_name: Fuco1/smartparens
+  upstream_url: https://github.com/Fuco1/smartparens
+  warning: "Obsolete lsh/if-let/when-let/point-at-eol, docstring quoting/width, unused vars, and undefined-function/free-variable references."
+  fix: >-
+    Seven types: lsh -> ash, if-let/when-let -> let + if/when, point-at-eol ->
+    line-end-position, escaped/reflowed docstrings, dropped/underscored unused
+    vars, and forward defvar / declare-function for free vars and optional
+    functions. No minimum bump (all compatible with 27.1+).
+  ci: "Added a byte-compile job (separate from the pre-existing broken test job) on Emacs 30.1 and others; installs dash."
+  pr_url: https://github.com/Fuco1/smartparens/pull/1242
+  pr_label: Fuco1/smartparens#1242
+  status: Submitted
+
+- package: dune
+  upstream_name: ocaml/dune
+  upstream_url: https://github.com/ocaml/dune
+  warning: "Obsolete variable/function, missing lexical-binding cookies, free variables, an unused argument, and an undefined function."
+  fix: >-
+    Eight types across dune.el / dune-flymake.el / dune-watch.el: quoted an
+    obsolete font-lock face, removed a no-op easy-menu-add, declare-function for
+    xref-push-marker-stack, forward defvars for smie--parent and others, added
+    lexical-binding cookies, and underscored an unused argument.
+  ci: "Repo had no Emacs CI. Added byte-compile + load on Emacs 29.1, 30.1, snapshot (no -Werror, residual remains) + dependabot."
+  pr_url: https://github.com/ocaml/dune/pull/14798
+  pr_label: ocaml/dune#14798
+  status: Submitted
+
+- package: annalist
+  upstream_name: noctuid/annalist.el
+  upstream_url: https://github.com/noctuid/annalist.el
+  warning: "Docstrings with unescaped single quotes (10 definitions)."
+  fix: >-
+    Escaped the docstring quotes. Residual (Emacs 24.4 only): unused vars from
+    the external org-babel-map-src-blocks macro and an optional evil function.
+  ci: "Repo had no CI. Added byte-compile (warnings as errors) on Emacs 30.1, snapshot; plain compile/load on 24.4 (external-macro residuals) + dependabot."
+  pr_url: https://github.com/noctuid/annalist.el/pull/6
+  pr_label: noctuid/annalist.el#6
+  status: Submitted
+
 - package: posframe
   upstream_name: tumashu/posframe
   upstream_url: https://github.com/tumashu/posframe
