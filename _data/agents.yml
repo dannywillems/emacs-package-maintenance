@@ -15,3 +15,30 @@
     minimum and latest stable Emacs, and open one upstream pull request.
   spec: agents/byte-compile-warning-fix.md
   status: Active
+
+- id: maintenance-health-check
+  name: Maintenance health check
+  summary: >-
+    Read-only. Snapshot a package's health: last activity, CI presence and what
+    it tests, declared vs effective minimum Emacs, and byte-compile cleanliness.
+    Feeds the coverage table; opens no pull request.
+  spec: agents/maintenance-health-check.md
+  status: Draft
+
+- id: dependency-audit
+  name: Dependency audit
+  summary: >-
+    Read-only. Resolve a package's transitive dependencies and flag
+    supply-chain risk: unmaintained or archived deps, known advisories
+    (GHSA/OSV/CVE), network/native surface, and whether deps are pinned.
+  spec: agents/dependency-audit.md
+  status: Draft
+
+- id: lexical-binding-migration
+  name: Lexical-binding migration
+  summary: >-
+    Add the lexical-binding cookie to files that lack it, but only where it
+    preserves behaviour (no reliance on dynamic binding); silence surfaced
+    warnings, add CI, and open one pull request.
+  spec: agents/lexical-binding-migration.md
+  status: Draft
