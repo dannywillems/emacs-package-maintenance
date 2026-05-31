@@ -186,3 +186,33 @@ footer {
   background: #2e7d32;
   color: #fff;
 }
+.status.status-skipped {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+/* Package coverage table */
+.table-wrap {
+  overflow-x: auto;
+}
+table.coverage {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.85rem;
+}
+table.coverage th,
+table.coverage td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+table.coverage th {
+  white-space: nowrap;
+  border-bottom: 2px solid var(--border);
+}
+table.coverage td:first-child {
+  white-space: nowrap;
+  font-weight: 600;
+}

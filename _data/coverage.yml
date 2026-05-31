@@ -1,0 +1,237 @@
+# Per-package coverage recap. Complementary to MELPA: a maintenance-health
+# snapshot (was a fix sent, was CI added, what does CI actually test, when was
+# it last checked) to gauge how well a package's continued support is verified.
+# Not a package source and not a replacement for MELPA.
+#
+# Fields:
+#   package, upstream, url
+#   outcome:  PR | Skipped
+#   status:   Submitted | Merged | Skipped
+#   pr_url, pr_label  (when outcome is PR)
+#   ci:       Added | Extended | Existing | None
+#   tested:   short summary of what CI exercises (Emacs versions etc.)
+#   werror:   Yes | No | Unknown   (byte-compile with warnings as errors)
+#   checked:  YYYY-MM-DD of the last check
+#   note:     optional short note (e.g. skip reason)
+
+- package: autothemer
+  upstream: jasonm23/autothemer
+  url: https://github.com/jasonm23/autothemer
+  outcome: PR
+  status: Merged
+  pr_url: https://github.com/jasonm23/autothemer/pull/31
+  pr_label: jasonm23/autothemer#31
+  ci: Extended
+  tested: "ert tests on Emacs 26.1-28.2, 30.1, snapshot"
+  werror: "No"
+  checked: 2026-05-31
+
+- package: xterm-color
+  upstream: atomontage/xterm-color
+  url: https://github.com/atomontage/xterm-color
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/atomontage/xterm-color/pull/51
+  pr_label: atomontage/xterm-color#51
+  ci: Added
+  tested: "byte-compile + load on Emacs 25.1, 30.1, snapshot"
+  werror: "Yes"
+  checked: 2026-05-31
+
+- package: merlin
+  upstream: ocaml/merlin
+  url: https://github.com/ocaml/merlin
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/ocaml/merlin/pull/2076
+  pr_label: ocaml/merlin#2076
+  ci: Existing
+  tested: "upstream emacs-lint workflow"
+  werror: Unknown
+  checked: 2026-05-31
+
+- package: yaml
+  upstream: zkry/yaml.el
+  url: https://github.com/zkry/yaml.el
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/zkry/yaml.el/pull/66
+  pr_label: zkry/yaml.el#66
+  ci: Extended
+  tested: "byte-compile on Emacs 25.1, 30.1, snapshot; ert on 27.2"
+  werror: "Yes"
+  checked: 2026-05-31
+
+- package: treepy
+  upstream: volrath/treepy.el
+  url: https://github.com/volrath/treepy.el
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/volrath/treepy.el/pull/19
+  pr_label: volrath/treepy.el#19
+  ci: Added
+  tested: "byte-compile + tests on Emacs 27.1, 30.1, snapshot"
+  werror: "Yes"
+  checked: 2026-05-31
+
+- package: evil-surround
+  upstream: emacs-evil/evil-surround
+  url: https://github.com/emacs-evil/evil-surround
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/emacs-evil/evil-surround/pull/220
+  pr_label: emacs-evil/evil-surround#220
+  ci: Added
+  tested: "byte-compile (library) + load on Emacs 27.2, 30.1, snapshot"
+  werror: "Yes"
+  checked: 2026-05-31
+
+- package: evil-commentary
+  upstream: linktohack/evil-commentary
+  url: https://github.com/linktohack/evil-commentary
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/linktohack/evil-commentary/pull/31
+  pr_label: linktohack/evil-commentary#31
+  ci: Added
+  tested: "byte-compile + load on Emacs 27.1, 30.1, snapshot"
+  werror: "No"
+  checked: 2026-05-31
+
+- package: imenu-list
+  upstream: bmag/imenu-list
+  url: https://github.com/bmag/imenu-list
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/bmag/imenu-list/pull/90
+  pr_label: bmag/imenu-list#90
+  ci: Added
+  tested: "byte-compile + load on Emacs 24.3, 30.1, snapshot"
+  werror: "No"
+  checked: 2026-05-31
+
+- package: rust-mode
+  upstream: rust-lang/rust-mode
+  url: https://github.com/rust-lang/rust-mode
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/rust-lang/rust-mode/pull/589
+  pr_label: rust-lang/rust-mode#589
+  ci: Added
+  tested: "byte-compile on Emacs 26.1, 30.1, snapshot"
+  werror: "Yes"
+  checked: 2026-05-31
+
+- package: caml
+  upstream: ocaml/caml-mode
+  url: https://github.com/ocaml/caml-mode
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/ocaml/caml-mode/pull/21
+  pr_label: ocaml/caml-mode#21
+  ci: Added
+  tested: "byte-compile on Emacs 24.4, 30.1, snapshot"
+  werror: "Yes"
+  checked: 2026-05-31
+
+- package: sage-shell-mode
+  upstream: sagemath/sage-shell-mode
+  url: https://github.com/sagemath/sage-shell-mode
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/sagemath/sage-shell-mode/pull/87
+  pr_label: sagemath/sage-shell-mode#87
+  ci: Added
+  tested: "byte-compile + load on Emacs 24.4, 30.1, snapshot"
+  werror: "No"
+  checked: 2026-05-31
+
+- package: winum
+  upstream: deb0ch/emacs-winum
+  url: https://github.com/deb0ch/emacs-winum
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/deb0ch/emacs-winum/pull/37
+  pr_label: deb0ch/emacs-winum#37
+  ci: Added
+  tested: "byte-compile + load on Emacs 24.5, 30.1, snapshot"
+  werror: "No"
+  checked: 2026-05-31
+
+- package: deferred
+  upstream: kiwanami/emacs-deferred
+  url: https://github.com/kiwanami/emacs-deferred
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/kiwanami/emacs-deferred/pull/60
+  pr_label: kiwanami/emacs-deferred#60
+  ci: Added
+  tested: "byte-compile + load on Emacs 24.4, 30.1, snapshot"
+  werror: "No"
+  checked: 2026-05-31
+
+- package: ht
+  upstream: Wilfred/ht.el
+  url: https://github.com/Wilfred/ht.el
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "Cask/make on Emacs 25.3-28.2, snapshot"
+  werror: Unknown
+  checked: 2026-05-31
+  note: "Library is warning-clean; only test-file lexical-binding cookie, which is behaviour-changing."
+
+- package: dash
+  upstream: magnars/dash.el
+  url: https://github.com/magnars/dash.el
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "byte-compile on Emacs 24.1-30.2, snapshot"
+  werror: "Yes"
+  checked: 2026-05-31
+  note: "Only warning is a deliberate obsolescence notice in dash-functional.el."
+
+- package: swift-mode
+  upstream: swift-emacs/swift-mode
+  url: https://github.com/swift-emacs/swift-mode
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "upstream run-test workflow"
+  werror: Unknown
+  checked: 2026-05-31
+  note: "Real source files compile with zero warnings."
+
+- package: nerd-icons
+  upstream: rainstormstudio/nerd-icons.el
+  url: https://github.com/rainstormstudio/nerd-icons.el
+  outcome: Skipped
+  status: Skipped
+  ci: None
+  tested: "-"
+  werror: "-"
+  checked: 2026-05-31
+  note: "No genuine warnings on the current default branch."
+
+- package: tuareg
+  upstream: ocaml/tuareg
+  url: https://github.com/ocaml/tuareg
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "upstream workflow"
+  werror: Unknown
+  checked: 2026-05-31
+  note: "Built sources compile clean; flagged file was an example config."
+
+- package: doom-modeline
+  upstream: seagle0128/doom-modeline
+  url: https://github.com/seagle0128/doom-modeline
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "upstream workflow"
+  werror: Unknown
+  checked: 2026-05-31
+  note: "No genuine warnings on the default branch."

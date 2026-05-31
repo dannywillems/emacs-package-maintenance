@@ -111,6 +111,52 @@ layout: null
         {%- endfor %}
       </section>
 
+      <section id="coverage">
+        <h2>Package coverage</h2>
+        <p>
+          A maintenance-health snapshot of the packages gone through: whether a
+          fix was sent, whether CI exists and what it actually tests, and when
+          each was last checked. This is complementary to MELPA: a quick signal
+          of how well a package's continued support is verified, not a package
+          source and not a replacement for MELPA.
+        </p>
+        <div class="table-wrap">
+          <table class="coverage">
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Outcome</th>
+                <th>CI</th>
+                <th>Emacs tested</th>
+                <th>Warnings as errors</th>
+                <th>Last checked</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for c in site.data.coverage %}
+              <tr>
+                <td><a href="{{ c.url }}">{{ c.package }}</a></td>
+                <td>
+                  {%- if c.outcome == "PR" %}
+                  <a href="{{ c.pr_url }}">{{ c.pr_label }}</a>
+                  <span class="status status-{{ c.status | downcase }}"
+                    >{{ c.status }}</span
+                  >
+                  {%- else %}
+                  <span class="status status-skipped">Skipped</span>
+                  {%- endif %}
+                </td>
+                <td>{{ c.ci }}</td>
+                <td>{{ c.tested }}</td>
+                <td>{{ c.werror }}</td>
+                <td>{{ c.checked }}</td>
+              </tr>
+              {%- endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section id="fixes">
         <h2>Fixes log</h2>
         <div class="filter">
