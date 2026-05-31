@@ -27,16 +27,34 @@
   pr_label: Fuco1/smartparens#1242
   status: Submitted
 
+- package: rustic
+  upstream_name: emacs-rustic/rustic
+  upstream_url: https://github.com/emacs-rustic/rustic
+  warning: "Obsolete cl-gensym/if-let/when-let, docstring quoting/width, and unused lexical args."
+  fix: >-
+    Five types: cl-gensym -> gensym, if-let/when-let -> if-let*/when-let* (all
+    fine on the declared 28.2 minimum), escaped/reflowed docstrings, underscored
+    unused args. Residual: optional-integration free vars/functions (eglot,
+    flycheck, polymode, lsp, inheritenv) and behaviour-changing replacements
+    (replace-buffer-contents, project-roots, a defcustom :type).
+  ci: "Repo had no byte-compile CI. Added byte-compile + load on Emacs 28.2, 30.1, snapshot + dependabot."
+  pr_url: https://github.com/emacs-rustic/rustic/pull/128
+  pr_label: emacs-rustic/rustic#128
+  status: Submitted
+  note: "earlier PR to the dormant brotzeit/rustic was closed in favour of this"
+
 - package: dune
   upstream_name: ocaml/dune
   upstream_url: https://github.com/ocaml/dune
-  warning: "Obsolete variable/function, missing lexical-binding cookies, free variables, an unused argument, and an undefined function."
+  warning: "Undefined variable (a typo), obsolete variable/function, missing lexical-binding cookies, free variables, and an unused argument."
   fix: >-
-    Eight types across dune.el / dune-flymake.el / dune-watch.el: quoted an
-    obsolete font-lock face, removed a no-op easy-menu-add, declare-function for
-    xref-push-marker-stack, forward defvars for smie--parent and others, added
-    lexical-binding cookies, and underscored an unused argument.
-  ci: "Repo had no Emacs CI. Added byte-compile + load on Emacs 29.1, 30.1, snapshot (no -Werror, residual remains) + dependabot."
+    Corrected a void-variable bug (dune-flymake.el used undefined dune-program
+    where dune-flymake-program was intended), fixed an invalid defcustom :type
+    (bool -> boolean), dropped an always-true fboundp guard, quoted an obsolete
+    font-lock face, removed a no-op easy-menu-add, added declare-function /
+    forward defvars and lexical-binding cookies, and suppressed an obsolete
+    legacy-flymake fallback at its site.
+  ci: "Repo had no Emacs CI. Added byte-compile (warnings as errors) + load on Emacs 29.1, 30.1, snapshot + dependabot. Warning-clean."
   pr_url: https://github.com/ocaml/dune/pull/14798
   pr_label: ocaml/dune#14798
   status: Submitted

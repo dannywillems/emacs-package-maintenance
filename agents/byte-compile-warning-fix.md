@@ -56,7 +56,12 @@ open one focused pull request upstream.
    anaphoric macros. If the package already uses a feature above its declared
    minimum (so it does not byte-compile on the declared one), correct
    `Package-Requires` to the true minimum and say so; do not raise the minimum
-   merely to silence a warning that has a version-compatible rewrite.
+   merely to silence a warning that has a version-compatible rewrite. When a
+   fix would otherwise need a newer Emacs than the declared minimum, you may add
+   a small version conditional (for example `(if (fboundp 'NEW) (NEW ...) (OLD
+   ...))`, a `boundp` guard, or `static-if`) so the warning is fixed on new
+   Emacs while the old path still works. Keep such conditionals minimal and the
+   commit well-scoped.
 6. Verify: byte-compile the changed files with warnings as errors and confirm
    the target warning is gone with no new warnings; check balanced parens.
 7. CI. The workflow byte-compiles with warnings treated as errors (`-Werror`)
