@@ -59,28 +59,44 @@ open one focused pull request upstream.
    merely to silence a warning that has a version-compatible rewrite.
 6. Verify: byte-compile the changed files with warnings as errors and confirm
    the target warning is gone with no new warnings; check balanced parens.
-7. CI. If the package is warning-clean after the safe fixes, add (or extend) a
-   workflow that byte-compiles with warnings treated as errors on the minimum
-   Emacs, the latest stable, and the development snapshot, plus dependabot. If
-   behaviour-changing warnings remain (so warnings-as-errors cannot be green),
-   add a workflow that byte-compiles and loads without `-Werror`, and list the
-   residual warnings in the pull request with why they are out of scope. Either
-   way, ensure the latest stable Emacs is tested.
+7. CI. The workflow byte-compiles with warnings treated as errors (`-Werror`)
+   on the minimum Emacs, the latest stable, and the development snapshot, plus
+   dependabot. A green CI must mean the package is warning-clean. Do NOT add a
+   CI that compiles without `-Werror` to get a green run while warnings remain;
+   that hides the very thing this effort is about. To make `-Werror` green, fix
+   every warning behaviour-preservingly. For a warning that genuinely cannot be
+   fixed without changing behaviour, suppress it precisely at its site with
+   `with-suppressed-warnings` (Emacs 27.1+) and an inline comment stating why;
+   this is behaviour-preserving and keeps the suppression visible in the diff.
+   If you can make neither a fix nor a justified site-suppression, do NOT open a
+   pull request: skip and report. Never ship a green CI that ignores warnings.
 8. Commit, one commit per warning type plus a separate commit for the CI change,
    push to the fork, and wait for the fork CI to pass.
-9. Open one pull request to the upstream default branch, describing each fix and
-   any residual out-of-scope warnings, then add a short comment noting this is
-   an automated community-maintenance effort and linking the tracking site:
+9. Open one pull request to the upstream default branch, describing each fix,
+   then add a short comment noting this is an automated community-maintenance
+   effort and linking the tracking site:
    <https://dannywillems.github.io/emacs-package-maintenance/>.
 
-## Hard rule
+## Hard rules
 
-Behaviour preservation is the hard requirement. Fix every warning that can be
-fixed without changing behaviour; leave the rest and record them. Open a pull
-request if at least one warning was fixed cleanly and the fork CI is green. If
-nothing can be fixed without changing behaviour, report skipped with a reason.
-A skip is a good outcome; a behaviour-changing or misleading pull request is
-not.
+Behaviour preservation is the requirement, and a pull request must not hide
+anything.
+
+- Do not hide warnings behind a non-`-Werror` CI. The CI must fail on any
+  warning; achieve green by fixing or by an explicit, commented
+  `with-suppressed-warnings` at the site.
+- Do not hide bugs. A warning can point at a real defect. Before silencing a
+  "reference to free variable" with a forward `defvar`, confirm the variable is
+  actually defined elsewhere in the package or is a known external dynamic
+  variable. If it is genuinely undefined, that is a latent bug: leave it and
+  report it, or skip; never paper over it with a declaration.
+- Be thorough on the clearly-safe fixes: invalid `:type` typos (for example
+  `bool` -> `boolean`), provably-dead `fboundp`/`featurep` guards on supported
+  Emacs, unused-result on a pure call, missing `defface` `:group`. Leaving these
+  unfixed and then disabling `-Werror` is not acceptable.
+- If the package cannot be made warning-clean (by fixing or justified
+  site-suppression) without changing behaviour or hiding a defect, do not open a
+  pull request. A skip is a good outcome; a misleading green CI is not.
 
 ## Status
 
