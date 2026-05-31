@@ -73,7 +73,7 @@
   ci: "Repo had no CI. Added byte-compile (warnings as errors) on Emacs 30.1, snapshot; plain compile/load on 24.4 (external-macro residuals) + dependabot."
   pr_url: https://github.com/noctuid/annalist.el/pull/6
   pr_label: noctuid/annalist.el#6
-  status: Submitted
+  status: Merged
 
 - package: posframe
   upstream_name: tumashu/posframe
@@ -262,7 +262,7 @@
   ci: "GitHub Actions across Emacs 27.1, 30.1, and snapshot; byte-compile (warnings as errors) and run tests; dependabot for actions."
   pr_url: https://github.com/volrath/treepy.el/pull/19
   pr_label: volrath/treepy.el#19
-  status: Submitted
+  status: Merged
 
 - package: yaml
   upstream_name: zkry/yaml.el
@@ -303,5 +303,4 @@
     (warnings as errors) and load. Dependabot for actions.
   pr_url: https://github.com/atomontage/xterm-color/pull/51
   pr_label: atomontage/xterm-color#51
-  status: Submitted
-  note: upstream appears dormant
+  status: Merged
