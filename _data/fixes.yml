@@ -13,6 +13,60 @@
 #   status:        one of Submitted, Merged, Closed, In progress
 #   note:          optional extra (omit if not needed)
 
+- package: sage-shell-mode
+  upstream_name: sagemath/sage-shell-mode
+  upstream_url: https://github.com/sagemath/sage-shell-mode
+  warning: "Seven warning types: obsolete point-at-bol, obsolete font-lock face variables, docstring quoting and width, doc string after interactive, quoted cl-case keys, and a missing lexical-binding cookie."
+  fix: >-
+    Fixed all seven behaviour-preserving warning types, one commit each:
+    point-at-bol to line-beginning-position, quoted font-lock faces, escaped and
+    reflowed docstrings, moved a docstring before interactive, bare cl-case keys,
+    and added a lexical-binding cookie to a file that does not rely on dynamic
+    binding. Warning count dropped from 30 to 8; the residual 8 are
+    behaviour-changing (defcustom :type widgets, alias ordering, struct types).
+  ci: "No GitHub Actions existed (only legacy .travis.yml). Added byte-compile + load on Emacs 24.4, 30.1, snapshot (no -Werror, residual warnings remain) + dependabot."
+  pr_url: https://github.com/sagemath/sage-shell-mode/pull/87
+  pr_label: sagemath/sage-shell-mode#87
+  status: Submitted
+
+- package: caml
+  upstream_name: ocaml/caml-mode
+  upstream_url: https://github.com/ocaml/caml-mode
+  warning: "Five defface forms fail to specify a containing customization group."
+  fix: >-
+    Added `:group 'languages` to each defface across camldebug.el, caml-font.el,
+    and caml-font-old.el. Behaviour-preserving (faces and defaults unchanged).
+  ci: "Repo had no CI. Added byte-compile (warnings as errors) on Emacs 24.4, 30.1, snapshot + dependabot. No residual warnings."
+  pr_url: https://github.com/ocaml/caml-mode/pull/21
+  pr_label: ocaml/caml-mode#21
+  status: Submitted
+
+- package: rust-mode
+  upstream_name: rust-lang/rust-mode
+  upstream_url: https://github.com/rust-lang/rust-mode
+  warning: "`when-let` obsolete (3 uses), and an inaccurate declared minimum Emacs."
+  fix: >-
+    Rewrote three `when-let` uses with `let` + `when`. Corrected Package-Requires
+    from 25.1 to 26.1 (uses `file-local-name`, Emacs 26.1) and added a runtime
+    `(require 'subr-x)` for `string-trim`. No residual warnings.
+  ci: "Added a byte-compile job (warnings as errors) on Emacs 26.1, 30.1, snapshot; tree-sitter file compiled only on Emacs >= 29.1 per its guard."
+  pr_url: https://github.com/rust-lang/rust-mode/pull/589
+  pr_label: rust-lang/rust-mode#589
+  status: Submitted
+
+- package: imenu-list
+  upstream_name: bmag/imenu-list
+  upstream_url: https://github.com/bmag/imenu-list
+  warning: "Docstring unescaped single quotes, and obsolete `point-at-bol`."
+  fix: >-
+    Escaped the docstring quotes and replaced `point-at-bol` with
+    `line-beginning-position`. The missing lexical-binding cookie and the
+    obsolete `hs-special-modes-alist` are left as residual (behaviour-changing).
+  ci: "Repo had no CI. Added byte-compile + load on Emacs 24.3, 30.1, snapshot (no -Werror, residual warnings remain) + dependabot."
+  pr_url: https://github.com/bmag/imenu-list/pull/90
+  pr_label: bmag/imenu-list#90
+  status: Submitted
+
 - package: evil-commentary
   upstream_name: linktohack/evil-commentary
   upstream_url: https://github.com/linktohack/evil-commentary
