@@ -49,6 +49,31 @@ footer {
   margin-right: auto;
 }
 
+/* Larger, roomier layout on desktop (root font-size scales all rem units). */
+@media (min-width: 1000px) {
+  html {
+    font-size: 18px;
+  }
+  header,
+  main,
+  footer {
+    max-width: 80ch;
+  }
+  body {
+    padding: 3rem 2rem 5rem;
+  }
+}
+@media (min-width: 1500px) {
+  html {
+    font-size: 20px;
+  }
+  header,
+  main,
+  footer {
+    max-width: 84ch;
+  }
+}
+
 header {
   margin-bottom: 2.5rem;
 }
