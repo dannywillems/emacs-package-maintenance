@@ -13,6 +13,21 @@
 #   status:        one of Submitted, Merged, Closed, In progress
 #   note:          optional extra (omit if not needed)
 
+- package: evil-commentary
+  upstream_name: linktohack/evil-commentary
+  upstream_url: https://github.com/linktohack/evil-commentary
+  warning: "Org integration functions not known to be defined at compile time."
+  fix: >-
+    Added `declare-function` for `org-at-heading-p` and `org-toggle-comment`,
+    matching the existing `org-in-src-block-p` declaration. The two missing
+    `lexical-binding` cookies are left as residual: adding them would change
+    behaviour (`evil-define-key` and a single-arg `eval` macro rely on dynamic
+    binding).
+  ci: "Repo had no CI. Added GitHub Actions (Emacs 27.1, 30.1, snapshot; install evil, byte-compile, load) without -Werror since behaviour-changing warnings remain, plus dependabot."
+  pr_url: https://github.com/linktohack/evil-commentary/pull/31
+  pr_label: linktohack/evil-commentary#31
+  status: Submitted
+
 - package: evil-surround
   upstream_name: emacs-evil/evil-surround
   upstream_url: https://github.com/emacs-evil/evil-surround
