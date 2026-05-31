@@ -21,8 +21,12 @@
     Seven types: lsh -> ash, if-let/when-let -> let + if/when, point-at-eol ->
     line-end-position, escaped/reflowed docstrings, dropped/underscored unused
     vars, and forward defvar / declare-function for free vars and optional
-    functions. No minimum bump (all compatible with 27.1+).
-  ci: "Added a byte-compile job (separate from the pre-existing broken test job) on Emacs 30.1 and others; installs dash."
+    functions. A later remediation pass cleared the last three classes:
+    --reduce -> --min-by (verified tie-equivalent), 3-arg cycle-spacing ->
+    just-one-space (identical on 29.1+), and with-suppressed-warnings around the
+    intentionally-retained legacy defadvice sites. No minimum bump (all
+    compatible with 27.1+); warning-clean under -Werror.
+  ci: "Added a byte-compile job (warnings as errors) on the full matrix Emacs 27.1-30.1 and snapshot; installs dash."
   pr_url: https://github.com/Fuco1/smartparens/pull/1242
   pr_label: Fuco1/smartparens#1242
   status: Submitted
@@ -90,10 +94,13 @@
   warning: "Docstring quoting/width, more than one docstring, and functions not known to be defined."
   fix: >-
     Escaped docstring quotes (incl. macro-generated ones), reflowed a wide
-    docstring, moved a misplaced `declare`, and added `declare-function`s.
-    Residual: a define-widget `or` type and two `cl-gensym` uses (replacing
-    needs Emacs 26.1, above the declared 24.4 minimum).
-  ci: "Repo had no byte-compile CI. Added byte-compile + load on Emacs 28.2, 29.4, 30.1, snapshot (no -Werror, residual remains) + dependabot."
+    docstring, moved a misplaced `declare`, and added `declare-function`s. A
+    remediation pass cleared the last two classes: the invalid `or` widget type
+    became `(choice symbol (repeat symbol))` (a latent bug, `or` is not a widget
+    type), and the two `cl-gensym` uses now go through a version-aware
+    `general--gensym` alias (built-in `gensym` when available, else `cl-gensym`
+    via with-suppressed-warnings), preserving the 24.4 minimum.
+  ci: "Repo had no byte-compile CI. Added byte-compile (warnings as errors) on the full matrix Emacs 28.2, 29.4, 30.1, snapshot + dependabot. Warning-clean."
   pr_url: https://github.com/noctuid/general.el/pull/571
   pr_label: noctuid/general.el#571
   status: Submitted
@@ -115,10 +122,12 @@
   upstream_url: https://github.com/deb0ch/emacs-winum
   warning: "Docstrings with unescaped single quotes (4)."
   fix: >-
-    Escaped the docstring quotes. The missing lexical-binding cookie, a
-    defcustom `:type 'list`, and the deprecated `define-minor-mode` positional
-    args are left as residual (all behaviour-changing).
-  ci: "Repo had no CI. Added byte-compile + load on Emacs 24.5, 30.1, snapshot (no -Werror, residual warnings remain) + dependabot."
+    Escaped the docstring quotes; a remediation pass cleared the rest: added the
+    lexical-binding cookie (and underscored the one counter it exposed), changed
+    the defcustom `:type 'list` to `(repeat function)`, and replaced the
+    deprecated `define-minor-mode` positional args with keywords (supported
+    since 24.1). Behaviour-preserving.
+  ci: "Repo had no CI. Added byte-compile on Emacs 24.5, 30.1, snapshot + dependabot; warnings as errors on 30.1 + snapshot, 24.5 kept plain."
   pr_url: https://github.com/deb0ch/emacs-winum/pull/37
   pr_label: deb0ch/emacs-winum#37
   status: Submitted
@@ -129,10 +138,12 @@
   warning: "Quoted condition-case conditions, and docstring quoting/width."
   fix: >-
     Unquoted the condition-case conditions and fixed docstring quoting and
-    width across deferred.el and concurrent.el. Residual: `cl-gensym` (the
-    `gensym` replacement needs Emacs 26.1, above the 24.x minimum) and an
-    unused-length debug path.
-  ci: "Repo had no CI. Added byte-compile + load on Emacs 24.4, 30.1, snapshot (no -Werror, residual warnings remain) + dependabot."
+    width across deferred.el and concurrent.el. A remediation pass cleared the
+    rest: the 11 `cl-gensym` uses now go through a version-aware
+    `deferred:gensym` alias (built-in `gensym` on 26.1+, else `cl-gensym`), and
+    the debug-only discarded `length` result is wrapped in
+    with-suppressed-warnings with a compat shim for the 24.x minimum.
+  ci: "Repo had no CI. Added byte-compile on Emacs 24.4, 30.1, snapshot + dependabot; warnings as errors on 30.1 + snapshot, 24.4 kept plain."
   pr_url: https://github.com/kiwanami/emacs-deferred/pull/60
   pr_label: kiwanami/emacs-deferred#60
   status: Submitted
@@ -146,9 +157,12 @@
     point-at-bol to line-beginning-position, quoted font-lock faces, escaped and
     reflowed docstrings, moved a docstring before interactive, bare cl-case keys,
     and added a lexical-binding cookie to a file that does not rely on dynamic
-    binding. Warning count dropped from 30 to 8; the residual 8 are
-    behaviour-changing (defcustom :type widgets, alias ordering, struct types).
-  ci: "No GitHub Actions existed (only legacy .travis.yml). Added byte-compile + load on Emacs 24.4, 30.1, snapshot (no -Werror, residual warnings remain) + dependabot."
+    binding. Warning count dropped from 30 to 8, then a remediation pass cleared
+    the last 8 by behaviour-preserving means: moved two defvaralias forms ahead
+    of their referents, corrected three defcustom `:type` specs (incl. an
+    unquoted const that was a latent Customize defect), and added a `cl-deftype`
+    for the already-implemented `sage-shell-cpl-state` predicate.
+  ci: "No GitHub Actions existed (only legacy .travis.yml). Added byte-compile (warnings as errors) + load on the full matrix Emacs 24.4, 30.1, snapshot + dependabot. Warning-clean."
   pr_url: https://github.com/sagemath/sage-shell-mode/pull/87
   pr_label: sagemath/sage-shell-mode#87
   status: Submitted
@@ -184,9 +198,12 @@
   warning: "Docstring unescaped single quotes, and obsolete `point-at-bol`."
   fix: >-
     Escaped the docstring quotes and replaced `point-at-bol` with
-    `line-beginning-position`. The missing lexical-binding cookie and the
-    obsolete `hs-special-modes-alist` are left as residual (behaviour-changing).
-  ci: "Repo had no CI. Added byte-compile + load on Emacs 24.3, 30.1, snapshot (no -Werror, residual warnings remain) + dependabot."
+    `line-beginning-position`. A remediation pass cleared the rest: added the
+    lexical-binding cookie (fixing the two unused bindings it exposed), migrated
+    off the obsolete `hs-special-modes-alist` (31.1) via a boundp-guarded direct
+    set of the hideshow buffer-locals, and made the idle-delay defcustom read
+    whichever of idle-update-delay / which-func-update-delay is bound.
+  ci: "Repo had no CI. Added byte-compile on Emacs 24.3, 30.1, snapshot + dependabot; warnings as errors on 30.1 + snapshot, 24.3 kept plain."
   pr_url: https://github.com/bmag/imenu-list/pull/90
   pr_label: bmag/imenu-list#90
   status: Submitted
@@ -197,11 +214,13 @@
   warning: "Org integration functions not known to be defined at compile time."
   fix: >-
     Added `declare-function` for `org-at-heading-p` and `org-toggle-comment`,
-    matching the existing `org-in-src-block-p` declaration. The two missing
-    `lexical-binding` cookies are left as residual: adding them would change
-    behaviour (`evil-define-key` and a single-arg `eval` macro rely on dynamic
-    binding).
-  ci: "Repo had no CI. Added GitHub Actions (Emacs 27.1, 30.1, snapshot; install evil, byte-compile, load) without -Werror since behaviour-changing warnings remain, plus dependabot."
+    matching the existing `org-in-src-block-p` declaration. A remediation pass
+    handled the lexical-binding cookies: the main file gets `lexical-binding: t`
+    with its two `evil-define-key` keymap calls switched to the equivalent
+    `evil-define-key*` function (the macro cannot install bindings under lexical
+    scope); the integration file gets an explicit `lexical-binding: nil` cookie
+    documenting the single-arg `eval` macro's dynamic-binding requirement.
+  ci: "Repo had no CI. Added GitHub Actions (install evil, byte-compile, load) on Emacs 27.1, 30.1, snapshot + dependabot; warnings as errors on 30.1 + snapshot, 27.1 kept plain."
   pr_url: https://github.com/linktohack/evil-commentary/pull/31
   pr_label: linktohack/evil-commentary#31
   status: Submitted

@@ -34,8 +34,8 @@
   pr_url: https://github.com/Fuco1/smartparens/pull/1242
   pr_label: Fuco1/smartparens#1242
   ci: Added
-  tested: "byte-compile + load on Emacs 30.1 and others"
-  werror: "No"
+  tested: "byte-compile (warnings as errors) on Emacs 27.1-30.1 and snapshot"
+  werror: "Yes"
   checked: 2026-05-31
 
 - package: rustic
@@ -228,8 +228,8 @@
   pr_url: https://github.com/noctuid/general.el/pull/571
   pr_label: noctuid/general.el#571
   ci: Added
-  tested: "byte-compile + load on Emacs 28.2, 29.4, 30.1, snapshot"
-  werror: "No"
+  tested: "byte-compile (warnings as errors) on Emacs 28.2, 29.4, 30.1, snapshot"
+  werror: "Yes"
   checked: 2026-05-31
 
 - package: org-roam
@@ -368,9 +368,10 @@
   pr_url: https://github.com/linktohack/evil-commentary/pull/31
   pr_label: linktohack/evil-commentary#31
   ci: Added
-  tested: "byte-compile + load on Emacs 27.1, 30.1, snapshot"
-  werror: "No"
+  tested: "byte-compile (warnings as errors) on Emacs 30.1, snapshot; plain on 27.1"
+  werror: "Partial"
   checked: 2026-05-31
+  note: "Minimum 27.1 kept plain (a 27.1-only unused-arg artifact from evil's operator macro); -Werror on 30.1 + snapshot."
 
 - package: imenu-list
   upstream: bmag/imenu-list
@@ -380,9 +381,10 @@
   pr_url: https://github.com/bmag/imenu-list/pull/90
   pr_label: bmag/imenu-list#90
   ci: Added
-  tested: "byte-compile + load on Emacs 24.3, 30.1, snapshot"
-  werror: "No"
+  tested: "byte-compile (warnings as errors) on Emacs 30.1, snapshot; plain on 24.3"
+  werror: "Partial"
   checked: 2026-05-31
+  note: "Minimum 24.3 kept plain (predates with-suppressed-warnings); -Werror on 30.1 + snapshot."
 
 - package: rust-mode
   upstream: rust-lang/rust-mode
@@ -416,8 +418,8 @@
   pr_url: https://github.com/sagemath/sage-shell-mode/pull/87
   pr_label: sagemath/sage-shell-mode#87
   ci: Added
-  tested: "byte-compile + load on Emacs 24.4, 30.1, snapshot"
-  werror: "No"
+  tested: "byte-compile (warnings as errors) on Emacs 24.4, 30.1, snapshot"
+  werror: "Yes"
   checked: 2026-05-31
 
 - package: winum
@@ -428,9 +430,10 @@
   pr_url: https://github.com/deb0ch/emacs-winum/pull/37
   pr_label: deb0ch/emacs-winum#37
   ci: Added
-  tested: "byte-compile + load on Emacs 24.5, 30.1, snapshot"
-  werror: "No"
+  tested: "byte-compile (warnings as errors) on Emacs 30.1, snapshot; plain on 24.5"
+  werror: "Partial"
   checked: 2026-05-31
+  note: "Minimum 24.5 kept plain (out-of-scope older byte-compiler); -Werror on 30.1 + snapshot."
 
 - package: deferred
   upstream: kiwanami/emacs-deferred
@@ -440,9 +443,10 @@
   pr_url: https://github.com/kiwanami/emacs-deferred/pull/60
   pr_label: kiwanami/emacs-deferred#60
   ci: Added
-  tested: "byte-compile + load on Emacs 24.4, 30.1, snapshot"
-  werror: "No"
+  tested: "byte-compile (warnings as errors) on Emacs 30.1, snapshot; plain on 24.4"
+  werror: "Partial"
   checked: 2026-05-31
+  note: "Minimum 24.4 kept plain (predates with-suppressed-warnings); -Werror on 30.1 + snapshot."
 
 - package: ht
   upstream: Wilfred/ht.el
