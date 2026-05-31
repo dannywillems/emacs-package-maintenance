@@ -13,6 +13,45 @@
 #   status:        one of Submitted, Merged, Closed, In progress
 #   note:          optional extra (omit if not needed)
 
+- package: posframe
+  upstream_name: tumashu/posframe
+  upstream_url: https://github.com/tumashu/posframe
+  warning: "Free-variable references and functions not known to be defined."
+  fix: >-
+    Added `defvar` forward declarations (`text-scale-mode-amount`,
+    `tab-line-format`) and `declare-function` for several frame/font builtins.
+    No residual warnings.
+  ci: "Repo had no CI. Added byte-compile (warnings as errors) + dependabot on Emacs 26.1, 30.1, snapshot."
+  pr_url: https://github.com/tumashu/posframe/pull/158
+  pr_label: tumashu/posframe#158
+  status: Submitted
+
+- package: general
+  upstream_name: noctuid/general.el
+  upstream_url: https://github.com/noctuid/general.el
+  warning: "Docstring quoting/width, more than one docstring, and functions not known to be defined."
+  fix: >-
+    Escaped docstring quotes (incl. macro-generated ones), reflowed a wide
+    docstring, moved a misplaced `declare`, and added `declare-function`s.
+    Residual: a define-widget `or` type and two `cl-gensym` uses (replacing
+    needs Emacs 26.1, above the declared 24.4 minimum).
+  ci: "Repo had no byte-compile CI. Added byte-compile + load on Emacs 28.2, 29.4, 30.1, snapshot (no -Werror, residual remains) + dependabot."
+  pr_url: https://github.com/noctuid/general.el/pull/571
+  pr_label: noctuid/general.el#571
+  status: Submitted
+
+- package: org-roam
+  upstream_name: org-roam/org-roam
+  upstream_url: https://github.com/org-roam/org-roam
+  warning: "Functions not known to be defined, and free-variable references."
+  fix: >-
+    Added `declare-function` and `defvar` forward declarations. Residual: one
+    EIEIO unknown-slot warning (needs class reordering), left as behaviour-changing.
+  ci: "Repo had no byte-compile CI. Added byte-compile + load on Emacs 29.4, 30.1, snapshot (no -Werror; snapshot non-blocking) + dependabot."
+  pr_url: https://github.com/org-roam/org-roam/pull/2621
+  pr_label: org-roam/org-roam#2621
+  status: Submitted
+
 - package: winum
   upstream_name: deb0ch/emacs-winum
   upstream_url: https://github.com/deb0ch/emacs-winum

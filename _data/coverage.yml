@@ -26,6 +26,97 @@
   werror: "No"
   checked: 2026-05-31
 
+- package: posframe
+  upstream: tumashu/posframe
+  url: https://github.com/tumashu/posframe
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/tumashu/posframe/pull/158
+  pr_label: tumashu/posframe#158
+  ci: Added
+  tested: "byte-compile on Emacs 26.1, 30.1, snapshot"
+  werror: "Yes"
+  checked: 2026-05-31
+
+- package: general
+  upstream: noctuid/general.el
+  url: https://github.com/noctuid/general.el
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/noctuid/general.el/pull/571
+  pr_label: noctuid/general.el#571
+  ci: Added
+  tested: "byte-compile + load on Emacs 28.2, 29.4, 30.1, snapshot"
+  werror: "No"
+  checked: 2026-05-31
+
+- package: org-roam
+  upstream: org-roam/org-roam
+  url: https://github.com/org-roam/org-roam
+  outcome: PR
+  status: Submitted
+  pr_url: https://github.com/org-roam/org-roam/pull/2621
+  pr_label: org-roam/org-roam#2621
+  ci: Added
+  tested: "byte-compile + load on Emacs 29.4, 30.1, snapshot"
+  werror: "No"
+  checked: 2026-05-31
+
+- package: diff-hl
+  upstream: dgutov/diff-hl
+  url: https://github.com/dgutov/diff-hl
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "upstream workflow"
+  werror: Unknown
+  checked: 2026-05-31
+  note: "All source files compile clean (lexical-binding throughout); actively maintained."
+
+- package: dockerfile-mode
+  upstream: spotify/dockerfile-mode
+  url: https://github.com/spotify/dockerfile-mode
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "upstream workflow"
+  werror: Unknown
+  checked: 2026-05-31
+  note: "Single source file compiles clean."
+
+- package: markdown-mode
+  upstream: jrblevin/markdown-mode
+  url: https://github.com/jrblevin/markdown-mode
+  outcome: Skipped
+  status: Skipped
+  ci: Existing
+  tested: "make test on Emacs 28.2, 29.4, 30.2, snapshot"
+  werror: Unknown
+  checked: 2026-05-31
+  note: "Flagship package; markdown-mode.el compiles clean."
+
+- package: pfuture
+  upstream: Alexander-Miller/pfuture
+  url: https://github.com/Alexander-Miller/pfuture
+  outcome: Skipped
+  status: Skipped
+  ci: None
+  tested: "-"
+  werror: "-"
+  checked: 2026-05-31
+  note: "Single source file compiles clean."
+
+- package: cfrs
+  upstream: Alexander-Miller/cfrs
+  url: https://github.com/Alexander-Miller/cfrs
+  outcome: Skipped
+  status: Skipped
+  ci: None
+  tested: "-"
+  werror: "-"
+  checked: 2026-05-31
+  note: "Single source file compiles clean (already lexical-binding)."
+
 - package: xterm-color
   upstream: atomontage/xterm-color
   url: https://github.com/atomontage/xterm-color
