@@ -156,3 +156,33 @@ footer {
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+/* Status filter (CSS-only: radios drive visibility of sibling .fixes-list) */
+.filter > input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.filter > label {
+  display: inline-block;
+  margin: 0 0.4rem 1rem 0;
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.filter > input:checked + label {
+  border-color: currentColor;
+  font-weight: 600;
+}
+#f-submitted:checked ~ .fixes-list .fix:not(.status-submitted),
+#f-merged:checked ~ .fixes-list .fix:not(.status-merged) {
+  display: none;
+}
+/* Distinct colour for the Merged status badge (scoped to the span). */
+.status.status-merged {
+  background: #2e7d32;
+  color: #fff;
+}

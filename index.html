@@ -113,43 +113,54 @@ layout: null
 
       <section id="fixes">
         <h2>Fixes log</h2>
-        {%- for fix in site.data.fixes %}
-        <article class="fix">
-          <h3>{{ fix.package }}</h3>
-          <dl>
-            <dt>Package</dt>
-            <dd>{{ fix.package }}</dd>
+        <div class="filter">
+          <input type="radio" id="f-all" name="statusfilter" checked />
+          <label for="f-all">All</label>
+          <input type="radio" id="f-submitted" name="statusfilter" />
+          <label for="f-submitted">Submitted</label>
+          <input type="radio" id="f-merged" name="statusfilter" />
+          <label for="f-merged">Merged</label>
 
-            <dt>Upstream</dt>
-            <dd>
-              <a href="{{ fix.upstream_url }}">{{ fix.upstream_name }}</a>
-            </dd>
+          <div class="fixes-list">
+            {%- for fix in site.data.fixes %}
+            {%- assign status_class = fix.status | downcase | replace: " ", "-" -%}
+            <article class="fix status-{{ status_class }}">
+              <h3>{{ fix.package }}</h3>
+              <dl>
+                <dt>Package</dt>
+                <dd>{{ fix.package }}</dd>
 
-            <dt>Warning</dt>
-            <dd>{% include inline-code.html text=fix.warning %}</dd>
+                <dt>Upstream</dt>
+                <dd>
+                  <a href="{{ fix.upstream_url }}">{{ fix.upstream_name }}</a>
+                </dd>
 
-            <dt>Fix</dt>
-            <dd>{% include inline-code.html text=fix.fix %}</dd>
+                <dt>Warning</dt>
+                <dd>{% include inline-code.html text=fix.warning %}</dd>
 
-            <dt>CI added</dt>
-            <dd>{% include inline-code.html text=fix.ci %}</dd>
+                <dt>Fix</dt>
+                <dd>{% include inline-code.html text=fix.fix %}</dd>
 
-            <dt>PR</dt>
-            <dd>
-              <a href="{{ fix.pr_url }}">{{ fix.pr_label }}</a>
-              ({{ fix.status | downcase }}{% if fix.note %}; {{ fix.note }}{% endif %})
-            </dd>
+                <dt>CI added</dt>
+                <dd>{% include inline-code.html text=fix.ci %}</dd>
 
-            <dt>Status</dt>
-            <dd>
-              {%- assign status_class = fix.status | downcase | replace: " ", "-" -%}
-              <span class="status status-{{ status_class }}"
-                >{{ fix.status }}</span
-              >
-            </dd>
-          </dl>
-        </article>
-        {%- endfor %}
+                <dt>PR</dt>
+                <dd>
+                  <a href="{{ fix.pr_url }}">{{ fix.pr_label }}</a>
+                  ({{ fix.status | downcase }}{% if fix.note %}; {{ fix.note }}{% endif %})
+                </dd>
+
+                <dt>Status</dt>
+                <dd>
+                  <span class="status status-{{ status_class }}"
+                    >{{ fix.status }}</span
+                  >
+                </dd>
+              </dl>
+            </article>
+            {%- endfor %}
+          </div>
+        </div>
       </section>
 
       <section id="process">
