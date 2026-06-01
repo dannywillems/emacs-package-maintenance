@@ -13,6 +13,26 @@
 #   status:        one of Submitted, Merged, Closed, In progress
 #   note:          optional extra (omit if not needed)
 
+- package: consult-gh
+  upstream_name: armindarvish/consult-gh
+  upstream_url: https://github.com/armindarvish/consult-gh
+  warning: "Obsolete when-let/if-let (Emacs 31.1), a sort arity false positive on Emacs < 30, and two stranded checks discarded in non-tail positions."
+  fix: >-
+    Replaced 90 when-let/if-let call sites with when-let*/if-let* (available
+    since Emacs 26.1, below the 29.4 minimum; single-binding sugar wrapped into
+    binding lists). Fixed two latent bugs the warnings exposed: a goto-char
+    trapped as a when-let binding in 10 copied commit-setup blocks (so point was
+    never moved), and a non-empty ref-link test left in a non-tail body position
+    in the embark create commands. Wrapped the Emacs 30+ keyword sort in
+    with-suppressed-warnings ((callargs sort)) so Emacs < 30 does not arity-check
+    the dead branch. No minimum bump; behaviour-preserving except the two
+    clearly-intended bug fixes.
+  ci: "Repo had no CI. Added a byte-compile job (warnings as errors) on Emacs 29.4, 30.1, and snapshot; installs deps from GNU/NonGNU/MELPA."
+  pr_url: https://github.com/armindarvish/consult-gh/pull/268
+  pr_label: armindarvish/consult-gh#268
+  status: Submitted
+  note: "consult-gh-with-pr-review.el excluded from the sweep: a pre-existing pr-review-open arity mismatch (3 args vs 4-7) against current pr-review, left for the maintainer rather than masked."
+
 - package: smartparens
   upstream_name: Fuco1/smartparens
   upstream_url: https://github.com/Fuco1/smartparens
