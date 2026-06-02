@@ -316,7 +316,7 @@
   upstream: ocaml/merlin
   url: https://github.com/ocaml/merlin
   outcome: PR
-  status: Submitted
+  status: Merged
   pr_url: https://github.com/ocaml/merlin/pull/2076
   pr_label: ocaml/merlin#2076
   ci: Existing
