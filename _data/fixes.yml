@@ -307,7 +307,7 @@
   ci: None; merlin already has an Emacs lint CI workflow.
   pr_url: https://github.com/ocaml/merlin/pull/2076
   pr_label: ocaml/merlin#2076
-  status: Submitted
+  status: Merged
 
 - package: xterm-color
   upstream_name: atomontage/xterm-color
